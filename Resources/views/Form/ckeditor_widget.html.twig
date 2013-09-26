@@ -11,6 +11,34 @@
     <script type="text/javascript" src="{{ asset(base_path ~ 'ckeditor.js') }}"></script>
     <script type="text/javascript">
     {% autoescape false %}
+        {% for name, definition_set in templates_definition_sets %}
+            {% if definition_set.templates is defined and definition_set.templates|length > 0 %}
+                CKEDITOR.addTemplates( '{{ name }}' , {
+                    {% if definition_set.imagesPath is not null %}
+                    imagesPath: '{{ definition_set.imagesPath }}',
+                    {% endif %}
+                    templates: [
+                        {% for template in definition_set.templates %}
+                        {
+                            {% if template.image is not null %}
+                            image: '{{ template.image }}',
+                            {% endif %}
+                            {% if template.description is not null %}
+                            description: '{{ template.description }}',
+                            {% endif %}
+                            {% if template.html is not null %}
+                            html: '{{ template.html }}',
+                            {% elseif template.twig is not null %}
+                            html: '{% filter escape('js') %}{% include template.twig %}{% endfilter %}',
+                            {% endif %}
+                            title: '{{ template.title }}'
+                        }
+                        {% if loop.last == false %},{% endif %}
+                        {% endfor %}
+                    ]
+                });
+            {% endif %}
+        {% endfor %}
         {% set plugins = '' %}
         {% for name, external_plugin in external_plugins %}
             CKEDITOR.plugins.addExternal('{{ name }}', '{{ app.request.basePath ~ external_plugin.path }}', '{{ external_plugin.file }}');

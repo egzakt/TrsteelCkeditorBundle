@@ -134,6 +134,7 @@ class CkeditorType extends AbstractType
         $view->vars['templates']                    = $options['templates'];
         $view->vars['templates_files']              = $options['templates_files'];
         $view->vars['templates_replace_content']    = $options['templates_replace_content'];
+        $view->vars['templates_definition_sets']    = $options['templates_definition_sets'];
     }
 
     /**
@@ -176,6 +177,7 @@ class CkeditorType extends AbstractType
             'templates'                    => $this->container->getParameter('trsteel_ckeditor.ckeditor.templates'),
             'templates_files'              => $this->container->getParameter('trsteel_ckeditor.ckeditor.templates_files'),
             'templates_replace_content'    => $this->container->getParameter('trsteel_ckeditor.ckeditor.templates_replace_content'),
+            'templates_definition_sets'    => $this->container->getParameter('trsteel_ckeditor.ckeditor.templates_definition_sets'),
         ));
 
         $resolver->setAllowedValues(array(

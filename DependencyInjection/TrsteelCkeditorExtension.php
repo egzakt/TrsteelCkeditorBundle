@@ -73,6 +73,7 @@ class TrsteelCkeditorExtension extends Extension
         $container->setParameter('trsteel_ckeditor.ckeditor.templates', $config['templates']);
         $container->setParameter('trsteel_ckeditor.ckeditor.templates_files', $config['templates_files']);
         $container->setParameter('trsteel_ckeditor.ckeditor.templates_replace_content', $config['templates_replace_content']);
+        $container->setParameter('trsteel_ckeditor.ckeditor.templates_definition_sets', isset($config['templates_definition_sets']) ? $config['templates_definition_sets'] : array());
     }
 
     private function getDefaultGroups()
